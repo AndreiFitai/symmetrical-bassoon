@@ -1,0 +1,45 @@
+version: "3"
+services:
+  subtitle-service:
+    build:
+      context: ./subtitle-service
+      dockerfile: Dockerfile
+    environment:
+      PORT: 8080
+    ports:
+      - 8080:8080
+    volumes:
+      - ./subtitle-service:/usr/src/app
+    command: npm run dev
+  translation-service:
+    build:
+      context: ./translation-service
+      dockerfile: Dockerfile
+    environment:
+      PORT: 8100
+    ports:
+      - 8100:8100
+    volumes:
+      - ./translation-service:/usr/src/app
+    command: npm run dev
+  email-service:
+    build:
+      context: ./email-service
+      dockerfile: Dockerfile
+    environment:
+      PORT: 8090
+    ports:
+      - 8090:8090
+    volumes:
+      - ./email-service:/usr/src/app
+    command: npm run dev
+  redis:
+    image: redis:alpine
+  db:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    volumes:
+      - data:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+volumes:
+  data:
