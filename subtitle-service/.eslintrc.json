@@ -20,5 +20,9 @@
     ],
     "rules": {
       "prettier/prettier": "error"
+    },
+    "globals": {
+      "Express":true,
+      "NodeJS":true
     }
 }

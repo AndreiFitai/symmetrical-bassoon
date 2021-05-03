@@ -1,5 +1,7 @@
 import { config } from 'dotenv'
-import express, { Application, Request, Response } from 'express'
+import express, { Application } from 'express'
+
+import { homeRoutes } from './routes/homeRoutes'
 
 config()
 
@@ -9,10 +11,8 @@ const app: Application = express()
 
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('Hello world!')
-})
+app.use('/', homeRoutes)
 
 app.listen(PORT, () => {
-	console.log(`subtitle-service server started at http://localhost:${PORT}`)
+	console.log(`server started at http://localhost:${PORT}`)
 })
