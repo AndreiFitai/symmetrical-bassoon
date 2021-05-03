@@ -1,16 +1,17 @@
-import { config } from 'dotenv'
 import express, { Application, Request, Response } from 'express'
-
-config()
-
-const { PORT } = process.env
+import { PORT } from './config'
 
 const app: Application = express()
 
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
 	res.send('Hello world!')
+})
+
+app.post('/translate', (req: Request, res: Response) => {
+	res.type('json').send(JSON.stringify(req.body))
 })
 
 app.listen(PORT, () => {

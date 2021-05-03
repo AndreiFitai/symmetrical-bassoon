@@ -1,11 +1,6 @@
-import { config } from 'dotenv'
 import express, { Application } from 'express'
-
 import { homeRoutes } from './routes/homeRoutes'
-
-config()
-
-const { PORT } = process.env
+import { PORT } from './config'
 
 const app: Application = express()
 

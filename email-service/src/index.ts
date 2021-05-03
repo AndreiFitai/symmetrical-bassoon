@@ -1,9 +1,5 @@
-import { config } from 'dotenv'
 import express, { Application, Request, Response } from 'express'
-
-config()
-
-const { PORT } = process.env
+import { PORT } from './config'
 
 const app: Application = express()
 

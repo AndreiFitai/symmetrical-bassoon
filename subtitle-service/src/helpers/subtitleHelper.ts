@@ -1,4 +1,4 @@
-interface SubtitleUnit {
+export interface SubtitleUnit {
 	id: number
 	timeFrame: string
 	text: string

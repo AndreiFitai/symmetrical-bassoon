@@ -2,8 +2,7 @@ import { Request, Response, Router } from 'express'
 import path from 'path'
 import multer from 'multer'
 import * as EmailValidator from 'email-validator'
-import { parseFile } from '../helpers/parseHelper'
-import { processSubtitleData } from '../helpers/subtitleHelper'
+import { translateAndEmailResult } from '../helpers/translationHelper'
 
 const router: Router = Router()
 
@@ -13,22 +12,26 @@ router.get('/', (req: Request, res: Response) => {
 	res.sendFile(path.resolve('public', 'index.html'))
 })
 
-router.post('/', upload.single('subtitle'), (req: Request, res: Response) => {
-	if (req?.file?.mimetype !== 'text/plain') {
-		return res.send('Wrong file type uploaded. Please upload a .txt file')
+router.post(
+	'/',
+	upload.single('subtitle'),
+	async (req: Request, res: Response) => {
+		if (req?.file?.mimetype !== 'text/plain') {
+			return res
+				.status(400)
+				.send('Wrong file type uploaded. Please upload a .txt file')
+		}
+
+		if (!EmailValidator.validate(req?.body?.email)) {
+			return res.status(400).send('Please provide a valid email address ')
+		}
+
+		translateAndEmailResult(req.body.email, req.file)
+
+		return res
+			.status(200)
+			.send('You will shortly receive an email with the translated subtitles!')
 	}
-
-	if (!EmailValidator.validate(req?.body?.email)) {
-		return res.send('Please provide a valid email address ')
-	}
-
-	const fileData = parseFile(req.file)
-	const subtitleData = processSubtitleData(fileData)
-	console.log('-----subtitleData-----', subtitleData)
-
-	return res
-		.status(200)
-		.send('You will shortly receive an email with the translated subtitles!')
-})
+)
 
 export const homeRoutes: Router = router
