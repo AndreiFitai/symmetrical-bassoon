@@ -28,9 +28,13 @@ services:
     build:
       context: ./email-service
       dockerfile: Dockerfile
+    depends_on:
+      - mailserver
     environment:
       PORT: 8090
       REDIS_URL: redis
+      MAILSERVER_HOST: mailserver
+      MAILSERVER_PORT: 1025
     ports:
       - 8090:8090
     volumes:
@@ -38,6 +42,13 @@ services:
     command: npm run dev
   redis:
     image: redis:alpine
+  mailserver:
+    image: mailhog/mailhog:latest
+    logging:
+      driver: none # disable chatty logs
+    ports:
+      - 1025:1025
+      - 8025:8025
   # db:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
   #   volumes:

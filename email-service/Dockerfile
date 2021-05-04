@@ -6,7 +6,8 @@ WORKDIR /usr/src/app/
 
 COPY package*.json ./
 
-RUN npm install
+# --no-optional to skip installing optional depency for rmsq-worker 
+RUN npm ci --no-optional
 
 COPY . .
 
