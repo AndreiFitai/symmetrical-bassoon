@@ -12,6 +12,6 @@ function env(name: string): string {
 	return value
 }
 
-const PORT = env('PORT')
+const REDIS_URL = env('REDIS_URL')
 
-export { PORT }
+export { REDIS_URL }

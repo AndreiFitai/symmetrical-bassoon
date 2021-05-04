@@ -1,13 +1,17 @@
 import { SubtitleUnit, processSubtitleData } from './subtitleHelper'
 import axios from 'axios'
-import { TRANSLATION_API } from '../config'
+import { API_TRANSLATE } from '../config'
+import { TRANSLATE_ENDPOINT } from '../constants'
 import { parseFile } from './fileHelper'
 import { emailResults } from './emailHelper'
 
 const translateSubtitles = async (
 	subtitleData: SubtitleUnit[]
 ): Promise<SubtitleUnit[]> => {
-	const { data } = await axios.post(TRANSLATION_API, subtitleData)
+	const { data } = await axios.post(
+		`${API_TRANSLATE}${TRANSLATE_ENDPOINT}`,
+		subtitleData
+	)
 
 	return data
 }
@@ -18,14 +22,17 @@ export const translateAndEmailResult = async (
 ) => {
 	try {
 		const fileData = parseFile(file)
+
 		const subtitleData = processSubtitleData(fileData)
+
 		const translatedSubtitles = await translateSubtitles(subtitleData)
-		emailResults(
+
+		emailResults({
 			email,
-			'success',
-			Buffer.from(JSON.stringify(translatedSubtitles))
-		)
+			messagePayload: 'success',
+			attachment: Buffer.from(JSON.stringify(translatedSubtitles))
+		})
 	} catch (error) {
-		emailResults(email, 'success')
+		emailResults({ email, messagePayload: `something went wrong :${error}` })
 	}
 }

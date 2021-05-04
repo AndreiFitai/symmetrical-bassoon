@@ -13,6 +13,7 @@ function env(name: string): string {
 }
 
 const PORT = env('PORT')
-const TRANSLATION_API = env('TRANSLATION_API')
+const API_TRANSLATE = env('API_TRANSLATE')
+const REDIS_URL = env('REDIS_URL')
 
-export { PORT, TRANSLATION_API }
+export { PORT, API_TRANSLATE, REDIS_URL }
