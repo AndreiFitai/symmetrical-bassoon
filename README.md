@@ -1,3 +1,5 @@
+[CLick for solution details](#solution)
+
 # Coding challenge
 
 Hi Andrei!
@@ -50,7 +52,7 @@ The output for this input would be a file containing something as:
 3 [00:04:59.00 - 00:05:30.00] Nein, my Schatz!!.
 ```
 
-The second part of the system is the aforementioned TMS, as its name states, is a system that stores past translations to be reused, the structure of this system is really simple, it contains two endpoints, one for translating and the other for introducing data. 
+The second part of the system is the aforementioned TMS, as its name states, is a system that stores past translations to be reused, the structure of this system is really simple, it contains two endpoints, one for translating and the other for introducing data.
 
 In order to translate a query, it uses the following flow:
 
@@ -65,20 +67,20 @@ In order to import data, it uses the following structure:
   {
     "source": "Hello World",
     "target": "Hallo Welt",
-		"sourceLanguage": "en",
-		"targetLanguage": "de"
+    "sourceLanguage": "en",
+    "targetLanguage": "de"
   },
   {
     "source": "Hello guys",
     "target": "Hallo Leute",
-		"sourceLanguage": "en",
-		"targetLanguage": "de"
+    "sourceLanguage": "en",
+    "targetLanguage": "de"
   },
   {
     "source": "I walk to the supermarket",
     "target": "Ich gehe zum Supermarkt.",
-		"sourceLanguage": "en",
-		"targetLanguage": "de"
+    "sourceLanguage": "en",
+    "targetLanguage": "de"
   }
 ]
 ```
@@ -100,4 +102,15 @@ Feel free to define yourself the API contracts and the project structure.
 - Usage of Typescript.
 - Usage of Docker.
 
-We wish you the best of lucks 🙏! 
+We wish you the best of lucks 🙏!
+
+# Solution
+
+TODO:
+
+1. Choose translation implementation - So far considering Elasticsearch + fuzzy query Vs SQLite + own levenshtein distance calculator
+2. Add translation caching
+3. Check if can improve RSMQ connection handling
+4. Tests
+5. Docker images optimizations
+6. Proper logging
