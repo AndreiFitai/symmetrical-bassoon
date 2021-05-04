@@ -4,7 +4,7 @@ export interface SubtitleUnit {
 	text: string
 }
 
-export const processSubtitleData = (stringData: string): SubtitleUnit[] => {
+export const splitSubtitleData = (stringData: string): SubtitleUnit[] => {
 	const subtitleUnits = stringData.split('\n')
 
 	const processedSubtitles = subtitleUnits.map((subtitleUnit) => {

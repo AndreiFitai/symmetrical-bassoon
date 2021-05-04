@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express'
 import path from 'path'
 import multer from 'multer'
 import * as EmailValidator from 'email-validator'
-import { translateAndEmailResult } from '../helpers/translationHelper'
+import { translateAndEmailResult } from '../services/translation'
 
 const router: Router = Router()
 

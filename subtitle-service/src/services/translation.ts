@@ -1,9 +1,9 @@
-import { SubtitleUnit, processSubtitleData } from './subtitleHelper'
+import { SubtitleUnit, splitSubtitleData } from '../helpers/subtitleHelper'
 import axios from 'axios'
 import { API_TRANSLATE } from '../config'
 import { TRANSLATE_ENDPOINT } from '../constants'
-import { parseFile } from './fileHelper'
-import { emailResults } from './emailHelper'
+import { parseFile } from '../helpers/fileHelper'
+import { emailResults } from './email'
 
 const translateSubtitles = async (
 	subtitleData: SubtitleUnit[]
@@ -23,9 +23,9 @@ export const translateAndEmailResult = async (
 	try {
 		const fileData = parseFile(file)
 
-		const subtitleData = processSubtitleData(fileData)
+		const subtitleUnits = splitSubtitleData(fileData)
 
-		const translatedSubtitles = await translateSubtitles(subtitleData)
+		const translatedSubtitles = await translateSubtitles(subtitleUnits)
 
 		emailResults({
 			email,
