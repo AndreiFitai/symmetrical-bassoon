@@ -7,6 +7,9 @@
 		"clean": "tsc --build --clean",
 		"start": "npm run build && node dist/src/index.js",
 		"dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
+		"debug": "ts-node-dev --inspect --respawn --transpile-only ./src/index.ts",
+		"migrate": "npm run build && typeorm migration:run",
+		"migrate:undo": "typeorm migration:revert",
 		"pretest": "npm run build",
 		"test": "mocha --spec dist/test/index.spec.js",
 		"lint": "eslint src/**/*.ts",
@@ -21,14 +24,19 @@
 	"license": "ISC",
 	"dependencies": {
 		"dotenv": "^8.2.0",
-		"express": "^4.17.1"
+		"express": "^4.17.1",
+		"js-levenshtein": "^1.1.6",
+		"mysql2": "^2.2.5",
+		"reflect-metadata": "^0.1.13",
+		"typeorm": "^0.2.32"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.17",
 		"@types/express": "^4.17.11",
+		"@types/js-levenshtein": "^1.1.0",
 		"@types/mocha": "^8.2.2",
 		"@types/multer": "^1.4.5",
-		"@types/node": "^15.0.1",
+		"@types/node": "^15.0.2",
 		"@typescript-eslint/eslint-plugin": "^4.22.0",
 		"@typescript-eslint/parser": "^4.22.0",
 		"chai": "^4.3.4",
