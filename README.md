@@ -106,12 +106,9 @@ We wish you the best of lucks 🙏!
 
 # Solution
 
-[Intro](#intro)
-
-[How to use](#how-to-use)
-
-[Issues i had](#issues-i-had)
-
+[Intro](#intro)  
+[How to use](#how-to-use)  
+[Issues i had](#issues-i-had)  
 [What i want to do next](#what-i-want-to-do-next)
 
 ## Intro
