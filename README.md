@@ -107,8 +107,11 @@ We wish you the best of lucks 🙏!
 # Solution
 
 [Intro](#intro)
+
 [How to use](#how-to-use)
+
 [Issues i had](#issues-i-had)
+
 [What i want to do next](#what-i-want-to-do-next)
 
 ## Intro
@@ -120,7 +123,7 @@ Due to that i was really excited to implement something a bit more complex ( may
 
 ## How to use
 
-Ensure you have Docker version 20.10.2 installed.
+Ensure you have Docker version 20.10+ installed.
 
 1. In the main project folder run `docker-compose up` or `docker-compose up -d` to run in detached mode
 2. Alternatively if you wish to modify the projects and have them restart immediately use `docker-compose -f docker-compose.dev.yaml up --build`
