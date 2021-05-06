@@ -14,10 +14,10 @@ COPY . .
 
 FROM base as production
 
-RUN npm run build
-
-EXPOSE 8100
-
 COPY wait-for-it.sh wait-for-it.sh 
 
 RUN chmod +x wait-for-it.sh
+
+RUN npm run build
+
+EXPOSE 8100

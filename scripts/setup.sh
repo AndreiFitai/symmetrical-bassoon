@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# chmod 755 build-dev.sh build-prod.sh up-dev.sh up-prod.sh
+cd ./translation-service && chmod +x wait-for-it.sh && npm i
 
-# chmod +x build-dev.sh build-prod.sh up-dev.sh up-prod.sh
+cd ..
+
+cd ./subtitle-service && npm i
+
+cd ..
+
+cd ./email-service && npm i --silent
+
+cd ..
 
 chmod 755 scripts/build-dev.sh scripts/build-prod.sh scripts/up-dev.sh scripts/up-prod.sh
 

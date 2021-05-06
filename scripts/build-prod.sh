@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker-compose up --build --force-rm --parallel
+docker-compose build --force-rm --parallel
+docker-compose up

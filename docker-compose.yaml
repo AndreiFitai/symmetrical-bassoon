@@ -58,6 +58,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: my-secret-pw
+    logging:
+      driver: none # disable chatty logs
     ports:
       - 3306:3306
     expose:
