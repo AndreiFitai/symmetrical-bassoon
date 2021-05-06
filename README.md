@@ -120,13 +120,18 @@ Due to that i was really excited to implement something a bit more complex ( may
 
 ## How to use
 
-Ensure you have Docker Engine v20.10+ and docker-compose v1.27+.
+Ensure you have Docker Engine v20.10+ , docker-compose v1.27+ and npm v6.14+
 
 I couldn't get the project to work properly on WSL2 so please use MacOS or a Linux based OS.
 
-1. In the main project folder run `docker-compose up` or `docker-compose up -d` to run in detached mode
-2. Alternatively if you wish to modify the projects and have them restart immediately use `docker-compose -f docker-compose.dev.yaml up --build`
-3. After the inital build simply run `docker-compose up` or ``docker-compose -f docker-compose.dev.yaml up`
+### Setup
+
+1. In the main project folder run `npm run setup` to install all required modules for all services and add permissions to the required files
+2. Run `npm run build-dev` to build the containers and start them up - in this mode you can modify services and containers will auto-restart with the new changes
+3. Alternatively run `npm run build-prod` - this would build and run the containers in isolation and would simulate a production env.
+4. After that you can run either `npm run up-dev` or `npm run up-prod` to start up the containers without rebuilding them
+
+### Usage
 
 - to save translation data send a post request to `http://localhost:8100/import-data` with a JSON in the following format:
 
@@ -160,9 +165,8 @@ I couldn't get the project to work properly on WSL2 so please use MacOS or a Lin
 
 After i make the PR i still want to work on this project as it is a lot of fun
 
-1. Proper logging
-2. Finish tests :(
-3. More error handling and bugfixes
-4. Add translation caching
-5. Docker images optimizations
-6. NGINX Api Gateway + Swagger
+1. Finish tests :(
+2. More error handling and bugfixes
+3. Add translation caching
+4. Docker images optimizations
+5. NGINX Api Gateway + Swagger
