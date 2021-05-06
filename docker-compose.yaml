@@ -27,7 +27,7 @@ services:
       DB_PASSWORD: password
     ports:
       - 8100:8100
-    command: npm run start
+    command: ["./wait-for-it.sh", "mysql:3306", "--", "npm", "run", "start"]
   email-service:
     build:
       context: ./email-service
@@ -64,5 +64,9 @@ services:
       - 3306
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 volumes:
   mysql_data:

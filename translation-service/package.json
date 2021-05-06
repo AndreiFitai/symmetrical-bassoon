@@ -5,7 +5,7 @@
 	"scripts": {
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
-		"start": "npm run build && node dist/src/index.js",
+		"start": "npm run build && typeorm migration:run && node dist/src/index.js",
 		"dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"debug": "ts-node-dev --inspect --respawn --transpile-only ./src/index.ts",
 		"migrate": "NODE_ENV=production npm run build && typeorm migration:run",
