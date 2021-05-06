@@ -13,5 +13,6 @@ function env(name: string): string {
 }
 
 const PORT = env('PORT')
+const NODE_ENV = env('NODE_ENV')
 
-export { PORT }
+export { PORT, NODE_ENV }

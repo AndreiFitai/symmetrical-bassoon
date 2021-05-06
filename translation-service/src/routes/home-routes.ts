@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express'
 import { validateImportData } from '../helpers/validators'
+import { logger } from '../logger'
 import { saveTranslations, translateStrings } from '../services/translation'
 
 const router: Router = Router()
@@ -14,7 +15,8 @@ router.post('/import-data', async (req: Request, res: Response) => {
 	try {
 		await saveTranslations(body)
 	} catch (error) {
-		res.status(400).send(`${error}`)
+		logger.error(error)
+		res.status(400).send(error)
 	}
 
 	res.send('Added new translation data to the DB')
@@ -30,6 +32,7 @@ router.post('/translate', async (req: Request, res: Response) => {
 
 		res.send(JSON.stringify(result))
 	} catch (error) {
+		logger.error(error)
 		res.status(400).send(`Issue occured translating text: ${error}`)
 	}
 })
