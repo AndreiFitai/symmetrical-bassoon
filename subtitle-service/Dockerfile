@@ -6,7 +6,7 @@ WORKDIR /usr/src/app/
 
 COPY package*.json ./
 
-RUN npm ci --no-optional
+RUN npm i --no-optional
 
 COPY . .
 
