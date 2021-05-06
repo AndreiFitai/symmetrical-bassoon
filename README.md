@@ -120,7 +120,9 @@ Due to that i was really excited to implement something a bit more complex ( may
 
 ## How to use
 
-Ensure you have Docker version 20.10+ installed.
+Ensure you have Docker Engine v20.10+ and docker-compose v1.27+.
+
+I couldn't get the project to work properly on WSL2 so please use MacOS or a Linux based OS.
 
 1. In the main project folder run `docker-compose up` or `docker-compose up -d` to run in detached mode
 2. Alternatively if you wish to modify the projects and have them restart immediately use `docker-compose -f docker-compose.dev.yaml up --build`
