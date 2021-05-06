@@ -1,5 +1,6 @@
 import { rsmq } from '../rsmq'
 import { QUEUE_NAME } from '../constants'
+import { logger } from '../logger'
 export interface MailData {
 	email: string
 	messagePayload: string
@@ -22,11 +23,11 @@ export const emailResults = ({
 		{ qname: QUEUE_NAME, message: JSON.stringify(msg) },
 		function (err: Error, res: string) {
 			if (err) {
-				console.error(err)
+				logger.error(err)
 				return
 			}
 
-			console.log('Message sent. ID:', res)
+			logger.info('Message sent. ID:', res)
 		}
 	)
 }

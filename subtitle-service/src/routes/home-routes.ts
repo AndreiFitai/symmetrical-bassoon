@@ -3,6 +3,7 @@ import path from 'path'
 import multer from 'multer'
 import { checkForRequestErrors } from '../helpers/validators'
 import { translateAndEmailResult } from '../services/translation'
+import { logger } from '../logger'
 
 const router: Router = Router()
 
@@ -21,8 +22,12 @@ router.post(
 		if (validationErrors) {
 			return validationErrors
 		}
-
-		translateAndEmailResult(req.body.email, req.body.language, req.file)
+		try {
+			translateAndEmailResult(req.body.email, req.body.language, req.file)
+		} catch (error) {
+			logger.error(error)
+			res.status(400).send(error)
+		}
 
 		return res
 			.status(200)

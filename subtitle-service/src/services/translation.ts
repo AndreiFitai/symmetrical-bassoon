@@ -7,7 +7,6 @@ import axios from 'axios'
 import { API_TRANSLATE } from '../config'
 import { TRANSLATE_ENDPOINT } from '../constants'
 import { parseFile } from '../helpers/file-helper'
-
 import { emailResults } from './email'
 export interface SubsWithTranslation extends SubtitleUnit {
 	translation: string
