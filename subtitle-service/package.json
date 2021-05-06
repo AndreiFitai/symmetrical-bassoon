@@ -8,7 +8,7 @@
 		"start": "npm run build && node dist/src/index.js",
 		"dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"pretest": "npm run build",
-		"test": "mocha --spec dist/test/index.spec.js",
+		"test": "mocha --spec dist/test/**/*.spec.js",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint src/**/*.ts --fix"
 	},

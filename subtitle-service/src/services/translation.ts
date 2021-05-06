@@ -17,12 +17,16 @@ const translateSubtitles = async (
 	subtitleData: SubtitleUnit[],
 	targetLanguage: string
 ): Promise<SubsWithTranslation[]> => {
-	const { data } = await axios.post(`${API_TRANSLATE}${TRANSLATE_ENDPOINT}`, {
-		subtitleData: subtitleData,
-		targetLanguage: targetLanguage
-	})
+	try {
+		const { data } = await axios.post(`${API_TRANSLATE}${TRANSLATE_ENDPOINT}`, {
+			subtitleData: subtitleData,
+			targetLanguage: targetLanguage
+		})
 
-	return data
+		return data
+	} catch (error) {
+		throw new Error(error.response.data)
+	}
 }
 
 export const translateAndEmailResult = async (

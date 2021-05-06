@@ -1,6 +1,6 @@
 import * as chai from 'chai'
 import { parseFile } from '../../../src/helpers/file-helper'
-import { createMulterFileArgs } from '../../testHelpers/file-helper'
+import { createMulterFileArgs } from '../../testHelpers'
 
 const expect = chai.expect
 

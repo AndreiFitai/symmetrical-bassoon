@@ -1,4 +1,4 @@
-import os from 'os'
+// import os from 'os'
 import { SubsWithTranslation } from '../services/translation'
 export interface SubtitleUnit {
 	id: number
@@ -10,6 +10,9 @@ export const splitSubtitleData = (stringData: string): SubtitleUnit[] => {
 	const subtitleUnits = stringData.split('\n')
 
 	const processedSubtitles = subtitleUnits.map((subtitleUnit) => {
+		if (subtitleUnit.indexOf('[') === -1 || subtitleUnit.indexOf(']') === -1)
+			throw new Error('invalid subtitle format - cannot process text')
+
 		const id = subtitleUnit.slice(0, subtitleUnit.indexOf('[') - 1)
 
 		const timeFrame = subtitleUnit.slice(
@@ -33,7 +36,7 @@ export const rebuildTranslatedSubtitles = (
 	})
 
 	const rebuiltSubs = sortedUnits.map(({ id, timeFrame, translation }) => {
-		return `${id} ${timeFrame} ${translation}${os.EOL}`
+		return `${id} ${timeFrame} ${translation}\n`
 	})
 
 	return rebuiltSubs.join('')
