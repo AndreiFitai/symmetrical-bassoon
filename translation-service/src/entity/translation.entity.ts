@@ -15,5 +15,5 @@ export class Translation {
 	target: string
 
 	@Column()
-	source: number
+	source: string
 }

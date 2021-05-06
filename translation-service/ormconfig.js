@@ -10,6 +10,6 @@ module.exports = {
 	migrations: ['dist/migrations/*.js'],
 	migrationsTableName: 'migrations',
 	cli: {
-		migrationsDir: '/src/migrations'
+		migrationsDir: '/migrations'
 	}
 }

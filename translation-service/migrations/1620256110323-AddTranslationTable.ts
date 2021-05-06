@@ -5,7 +5,7 @@ export class AddTranslationTable1620256110323 implements MigrationInterface {
 
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.query(
-			'CREATE TABLE `translation` (`id` varchar(36) NOT NULL, `targetLanguage` varchar(255) NOT NULL, `sourceLanguage` varchar(255) NOT NULL, `target` varchar(255) NOT NULL, `source` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB'
+			'CREATE TABLE `translation` (`id` varchar(36) NOT NULL, `targetLanguage` varchar(255) NOT NULL, `sourceLanguage` varchar(255) NOT NULL, `target` varchar(255) NOT NULL, `source` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB'
 		)
 	}
 
