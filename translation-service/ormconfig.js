@@ -1,3 +1,11 @@
+require('dotenv/config')
+
+const entities = {
+	development: ['dist/**/*.entity.js', 'src/**/*.entity.ts'],
+	production: ['dist/**/*.entity.js'],
+	test: ['dist/**/*.entity.js']
+}
+
 module.exports = {
 	type: process.env.DB_DIALECT,
 	host: process.env.DB_HOST,
@@ -6,7 +14,7 @@ module.exports = {
 	username: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
 	logging: true,
-	entities: ['dist/**/*.entity.js'],
+	entities: entities[process.env.NODE_ENV],
 	migrations: ['dist/migrations/*.js'],
 	migrationsTableName: 'migrations',
 	cli: {
