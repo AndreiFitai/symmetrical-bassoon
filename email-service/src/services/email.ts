@@ -1,6 +1,7 @@
 import { createTransport } from 'nodemailer'
 import Mail from 'nodemailer/lib/mailer'
 import SMTPTransport from 'nodemailer/lib/smtp-transport'
+import { logger } from '../logger'
 
 export const parseAttachementData = ({
 	type,
@@ -16,7 +17,7 @@ export const parseAttachementData = ({
 	if (type === 'Buffer') {
 		return Buffer.from(data).toString('utf8')
 	}
-	console.error('Unkown attachment data type - parsing anyways')
+	logger.warn('Unkown attachment data type - parsing anyways')
 	return data.toString()
 }
 
@@ -51,11 +52,11 @@ export const sendEmail = async (msg: any, transporter: Mail) => {
 	if (transporter.isIdle()) {
 		transporter.sendMail(message, (err, info) => {
 			if (err) {
-				console.log(`Error occurred: ${err.message}`)
+				logger.error(`Error occurred: ${err.message}`)
 				transporter.close()
 			}
 
-			console.log(`Message sent: ${info.messageId}`)
+			logger.info(`Message sent: ${info.messageId}`)
 		})
 	}
 }

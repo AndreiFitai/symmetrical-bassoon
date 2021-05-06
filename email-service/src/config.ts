@@ -15,5 +15,6 @@ function env(name: string): string {
 const REDIS_URL = env('REDIS_URL')
 const MAILSERVER_HOST = env('MAILSERVER_HOST')
 const MAILSERVER_PORT = env('MAILSERVER_PORT')
+const NODE_ENV = env('NODE_ENV')
 
-export { REDIS_URL, MAILSERVER_HOST, MAILSERVER_PORT }
+export { REDIS_URL, MAILSERVER_HOST, MAILSERVER_PORT, NODE_ENV }
