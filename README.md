@@ -1,4 +1,4 @@
-[CLick for solution details](#solution)
+[Click here to check solution details](#solution)
 
 # Coding challenge
 
@@ -108,9 +108,8 @@ We wish you the best of lucks 🙏!
 
 TODO:
 
-1. Choose translation implementation - So far considering Elasticsearch + fuzzy query Vs SQLite + own levenshtein distance calculator
+1. Translation target selector
 2. Add translation caching
-3. Check if can improve RSMQ connection handling
-4. Tests
-5. Docker images optimizations
-6. Proper logging
+3. Tests
+4. Docker images optimizations
+5. Proper logging

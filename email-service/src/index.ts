@@ -1,7 +1,7 @@
 import RSMQWorker from 'rsmq-worker'
 import { REDIS_URL, MAILSERVER_HOST, MAILSERVER_PORT } from './config'
 import { QUEUE_NAME } from './constants'
-import { sendEmail, generateTransporter } from './service/email'
+import { sendEmail, generateTransporter } from './services/email'
 
 const worker = new RSMQWorker(QUEUE_NAME, { host: REDIS_URL })
 
@@ -33,3 +33,4 @@ worker.on('timeout', function (msg: any) {
 })
 
 worker.start()
+console.log(`Email server listening for events !`)
