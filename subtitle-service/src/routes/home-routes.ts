@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express'
 import path from 'path'
 import multer from 'multer'
-import * as EmailValidator from 'email-validator'
+import { checkForRequestErrors } from '../helpers/validators'
 import { translateAndEmailResult } from '../services/translation'
 
 const router: Router = Router()
@@ -16,17 +16,13 @@ router.post(
 	'/',
 	upload.single('subtitle'),
 	async (req: Request, res: Response) => {
-		if (req?.file?.mimetype !== 'text/plain') {
-			return res
-				.status(400)
-				.send('Wrong file type uploaded. Please upload a .txt file')
+		const validationErrors = checkForRequestErrors(req, res)
+
+		if (validationErrors) {
+			return validationErrors
 		}
 
-		if (!EmailValidator.validate(req?.body?.email)) {
-			return res.status(400).send('Please provide a valid email address ')
-		}
-
-		translateAndEmailResult(req.body.email, req.file)
+		translateAndEmailResult(req.body.email, req.body.language, req.file)
 
 		return res
 			.status(200)

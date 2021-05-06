@@ -1,3 +1,5 @@
+import os from 'os'
+import { SubsWithTranslation } from '../services/translation'
 export interface SubtitleUnit {
 	id: number
 	timeFrame: string
@@ -21,4 +23,18 @@ export const splitSubtitleData = (stringData: string): SubtitleUnit[] => {
 	})
 
 	return processedSubtitles
+}
+
+export const rebuildTranslatedSubtitles = (
+	subtitleUnits: SubsWithTranslation[]
+): string => {
+	const sortedUnits = subtitleUnits.sort(function (a, b) {
+		return a.id - b.id
+	})
+
+	const rebuiltSubs = sortedUnits.map(({ id, timeFrame, translation }) => {
+		return `${id} ${timeFrame} ${translation}${os.EOL}`
+	})
+
+	return rebuiltSubs.join('')
 }
