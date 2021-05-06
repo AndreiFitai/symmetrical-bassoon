@@ -31,19 +31,19 @@ services:
       - 8100:8100
     volumes:
       - ./translation-service:/usr/src/app
-      command:
-        [
-          "./wait-for-it.sh",
-          "mysql:3306",
-          "--",
-          "npm",
-          "run",
-          "migrate",
-          "&&",
-          "npm",
-          "run",
-          "dev",
-        ]
+    command:
+      [
+        "./wait-for-it.sh",
+        "mysql:3306",
+        "--",
+        "npm",
+        "run",
+        "migrate",
+        "&&",
+        "npm",
+        "run",
+        "dev",
+      ]
   email-service:
     build:
       context: ./email-service
