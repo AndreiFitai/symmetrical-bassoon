@@ -1,8 +1,8 @@
 require('dotenv/config')
 
 const entities = {
-	dev: ['dist/**/*.entity.js', 'src/**/*.entity.ts'],
-	prod: ['dist/**/*.entity.js'],
+	prod: ['dist/**/*.entity.js', 'src/**/*.entity.ts'],
+	dev: ['dist/**/*.entity.js'],
 	test: ['dist/**/*.entity.js']
 }
 
