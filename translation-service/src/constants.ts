@@ -5,4 +5,8 @@ const TRANSLATION_UNIT_KEYS = [
 	'targetLanguage'
 ]
 
-export { TRANSLATION_UNIT_KEYS }
+const LANGUAGES = ['en', 'de', 'fr', 'es', 'it']
+
+const LANGUAGE_VARIABLES = ['sourceLanguage', 'sourceLanguage']
+
+export { TRANSLATION_UNIT_KEYS, LANGUAGES, LANGUAGE_VARIABLES }

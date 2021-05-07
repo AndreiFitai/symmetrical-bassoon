@@ -1,4 +1,8 @@
-import { TRANSLATION_UNIT_KEYS } from '../constants'
+import {
+	TRANSLATION_UNIT_KEYS,
+	LANGUAGES,
+	LANGUAGE_VARIABLES
+} from '../constants'
 import { TranslationUnit } from '../translation-unit.types'
 
 const validateTranslationUnit = (unit: TranslationUnit) => {
@@ -6,7 +10,12 @@ const validateTranslationUnit = (unit: TranslationUnit) => {
 	for (const key of TRANSLATION_UNIT_KEYS) {
 		if (!keys.includes(key)) return false
 		if (!unit[key]) return false
+
+		if (LANGUAGE_VARIABLES.includes(key)) {
+			if (!LANGUAGES.includes(unit[key]!)) return false
+		}
 	}
+
 	return true
 }
 
@@ -16,8 +25,9 @@ export const validateImportData = (
 	if (!Array.isArray(data)) return validateTranslationUnit(data)
 	if (!data.length) return false
 
-	for (const translationUnit of data) {
-		if (!validateTranslationUnit(translationUnit)) return false
+	for (let i = 0; i < data.length; i++) {
+		if (!validateTranslationUnit(data[i])) return false
 	}
+
 	return true
 }
