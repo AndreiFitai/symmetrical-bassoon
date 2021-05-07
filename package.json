@@ -1,9 +1,9 @@
 {
   "scripts": {
     "setup": "bash scripts/setup.sh",
-    "build-dev": "bash scripts/build-dev.sh",
-    "build-prod": "bash scripts/build-prod.sh",
-    "up-dev": "bash scripts/up-dev.sh",
-    "up-prod": "bash scripts/up-prod.sh"
+    "dev-build": "bash scripts/dev-build.sh",
+    "prod-build": "bash scripts/prod-build.sh",
+    "dev-up": "bash scripts/dev-up.sh",
+    "prod-up": "bash scripts/prod-up.sh"
   }
 }

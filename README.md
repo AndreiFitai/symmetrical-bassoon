@@ -127,28 +127,50 @@ I couldn't get the project to work properly on WSL2 so please use MacOS or a Lin
 ### Setup
 
 1. In the main project folder run `npm run setup` to install all required modules for all services and add permissions to the required files
-2. Run `npm run build-dev` to build the containers and start them up - in this mode you can modify services and containers will auto-restart with the new changes
-3. Alternatively run `npm run build-prod` - this would build and run the containers in isolation and would simulate a production env.
-4. After that you can run either `npm run up-dev` or `npm run up-prod` to start up the containers without rebuilding them
+2. Run `npm run dev-build` to build the containers and start them up - in this mode you can modify services and containers will auto-restart with the new changes
+3. Alternatively run `npm run prod-build` - this would build and run the containers in isolation and would simulate a production enviroment: containers not linked to project folders, no hot reload, different logging level.
+4. After that you can run either `npm run dev-up` or `npm run prod-up` to start up the containers without rebuilding them
 
 ### Usage
 
-- to save translation data send a post request to `http://localhost:8100/import-data` with a JSON in the following format:
+- to save translation data send a post request to `http://localhost:8080/import-data/` with a JSON in the following format:
 
-```
-[
-  {
-    "source": "Hello World",
-    "target": "Hallo Welt",
-    "sourceLanguage": "en",
-    "targetLanguage": "de"
-  }
-]
-```
+  - as an array of _translation units_ :
+    ```json
+    [
+      {
+        "source": "I am Arwen - I've come to help you.",
+        "target": "Ich bin Arwen - Ich bin gekommen, um dir zu helfen.",
+        "sourceLanguage": "en",
+        "targetLanguage": "de"
+      },
+      {
+        "source": "Come back to the light.",
+        "target": "Komm zurück zum Licht.",
+        "sourceLanguage": "en",
+        "targetLanguage": "de"
+      },
+      {
+        "source": "Nooo, my precious!!.",
+        "target": "Nein, my Schatz!!.",
+        "sourceLanguage": "en",
+        "targetLanguage": "de"
+      }
+    ]
+    ```
+  - or just one _translation unit_
+    ```json
+    {
+      "source": "I love german bureaucracy.",
+      "target": "Ich liebe deutsche Bürokratie.",
+      "sourceLanguage": "en",
+      "targetLanguage": "de"
+    }
+    ```
 
-- To request a translation go to `http://localhost:8070/` select your subtitle file, target language and email address - just make sure there's already translation data saved as indicated in the previous step :)
+- To request a translation go to `http://localhost:8080/` select your subtitle file, target language and email address - just make sure there's already translation data saved as indicated in the previous step :)
 
-- To view resulting email and attachment go to `http://localhost:8025/`
+- To view resulting email and attachment go to `http://localhost:8080/mail/`
   - Click on an email to view message
   - Click on the`MIME` tab where you can download the resulting subtitle
 
@@ -171,4 +193,4 @@ After i make the PR i still want to work on this project as it is a lot of fun
 1. Finish tests :(
 2. More error handling and bugfixes
 3. Add translation caching
-4. NGINX Api Gateway + Swagger
+4. Swagger

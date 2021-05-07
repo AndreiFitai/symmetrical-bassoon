@@ -12,6 +12,6 @@ cd ./email-service && npm i --silent
 
 cd ..
 
-chmod 755 scripts/build-dev.sh scripts/build-prod.sh scripts/up-dev.sh scripts/up-prod.sh
+chmod 755 scripts/dev-build.sh scripts/prod-build.sh scripts/dev-up.sh scripts/prod-up.sh
 
-chmod +x scripts/build-dev.sh scripts/build-prod.sh scripts/up-dev.sh scripts/up-prod.sh
+chmod +x scripts/dev-build.sh scripts/prod-build.sh scripts/dev-up.sh scripts/prod-up.sh
