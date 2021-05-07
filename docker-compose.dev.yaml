@@ -26,7 +26,7 @@ services:
       DB_HOST: mysql-db
       DB_PORT: 3306
       DB_DATABASE: translation
-      DB_USER: user
+      DB_USERNAME: user
       DB_PASSWORD: password
     ports:
       - 8100:8100
