@@ -154,12 +154,15 @@ I couldn't get the project to work properly on WSL2 so please use MacOS or a Lin
 
 ## Issues i had
 
-- I wanted to use Elasticsearch as it had integrated fuzzy search and wanted to try out a new technology. This became a problem since i the learning curve was a bit too high and i couldn't really make it work fast enough. The fuzzy match query also has a strict maximum allowed Levenshtein Edit distance of 2 which would not work considering the requirements of this challange.
-  In the end i stuck with MySQL which for a small sample size does the job - i would be curious to see how everything with work with a huge sample size.
+- I wanted to use Elasticsearch as it had integrated fuzzy search and wanted to try out a new technology. This became a problem since the learning curve was a bit too high and i couldn't really make it work fast enough. The fuzzy match query also has a strict maximum allowed Levenshtein Edit distance of 2 which would not work considering the requirements of this challange.
+  In the end i stuck with MySQL which for a small sample size does the job - it pulls all translations of the specified target language and calculates distances for each text - i would be curious to see how everything with work with a huge sample size.
 
 - Testing - this is a personal challenge for me as i'm struggling with mocking/stubbing in TS. For example i got stuck trying to mock nodemailer and in the end i had to call it quits as i was running out of time. This is definetly an area where i want to focus on in the future.
 
-- Issues between different TypeORM and ts-node-dev - this ate quite a bit of my time as i couldn't figure out what was going on because of my inexperience with how ts-node-dev actually works.
+- Issues between different TypeORM and ts-node-dev - this ate quite a bit of my time as i couldn't figure out what was going on because of my inexperience with how ts-node-dev actually works. Fixed by providing different ormconfig entities locations based on `NODE_ENV` value which is set when running migrations or starting the service.
+
+- Docker build issues: Builds were not working correctly due to missing tsconfig `rootDir": "./",` which resulted in an improper `dist` folder structure and missing `migrations` folder thus when tested in isolation both dev and prod builds failed to start.
+  Another challange that i had to tackle was that the translation-service was starting too quick and the db server was not ready yet resulting in issues running migrations and connecting to the db. To solve this i added `wait-for-it.sh` to the project folder and build steps. To make things easier as the file had to had the right permissions i added the setup and run scripts which ensures everything is set up properly for local development or production and users can run this project easily.
 
 ## What i want to do next
 
@@ -168,5 +171,4 @@ After i make the PR i still want to work on this project as it is a lot of fun
 1. Finish tests :(
 2. More error handling and bugfixes
 3. Add translation caching
-4. Docker images optimizations
-5. NGINX Api Gateway + Swagger
+4. NGINX Api Gateway + Swagger

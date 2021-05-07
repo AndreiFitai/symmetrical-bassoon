@@ -11,7 +11,7 @@ services:
     ports:
       - 8070:8070
     volumes:
-      - ./subtitle-service:/usr/src/app
+      - ./subtitle-service:/srv/app
     command: npm run dev
   translation-service:
     build:
@@ -31,7 +31,7 @@ services:
     ports:
       - 8100:8100
     volumes:
-      - ./translation-service:/usr/src/app
+      - ./translation-service:/srv/app
     command: >
       bash -c "./wait-for-it.sh mysql-db:3306 --
       npm run migrate && npm run dev"
@@ -48,7 +48,7 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - ./email-service:/usr/src/app
+      - ./email-service:/srv/app
     command: npm run dev
   redis:
     image: redis:alpine
