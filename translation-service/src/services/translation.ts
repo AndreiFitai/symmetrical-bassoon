@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { Translation } from '../entity/translation.entity'
 import { calculateEditDistance } from '../helpers/distance-calculations'
 
@@ -14,25 +14,15 @@ export const saveTranslations = async (
 	}
 }
 
-async function findTranslation(
-	text: string,
-	targetLanguage: string,
-	repo: Repository<Translation>
-): Promise<string> {
-	const allTargetLanguageTranslations = await repo.find({
-		where: { targetLanguage }
-	})
+function findTranslation(text: string, allTranslations: Translation[]): string {
+	if (!allTranslations) return text
 
-	if (!allTargetLanguageTranslations) return text
-
-	const translationUnitsWithScores = allTargetLanguageTranslations.map(
-		(translation) => {
-			const result = {
-				score: calculateEditDistance(translation.source, text)
-			}
-			return Object.assign(result, translation)
+	const translationUnitsWithScores = allTranslations.map((translation) => {
+		const result = {
+			score: calculateEditDistance(translation.source, text)
 		}
-	)
+		return Object.assign(result, translation)
+	})
 
 	const minScore = Math.min(
 		...translationUnitsWithScores.map((item) => item.score)
@@ -53,26 +43,16 @@ export const translateStrings = async (
 ) => {
 	const translationRepository = getRepository(Translation)
 
-	const resultArr: Promise<string>[] = []
-
-	const resultingData = data.map((textUnit: { text: string }) => {
-		resultArr.push(
-			findTranslation(textUnit.text, targetLanguage, translationRepository)
-		)
-
-		const tempObj: { translation: string | Promise<string> } = {
-			translation: ''
-		}
-
-		const result = Object.assign(tempObj, textUnit)
-
-		return result
+	const allTargetLanguageTranslations = await translationRepository.find({
+		where: { targetLanguage }
 	})
 
-	await Promise.all(resultArr).then((what) => {
-		what.forEach((text, index) => {
-			resultingData[index].translation = text
-		})
+	const resultingData = data.map((textUnit: { text: string }) => {
+		const translation = findTranslation(
+			textUnit.text,
+			allTargetLanguageTranslations
+		)
+		return Object.assign({ translation }, textUnit)
 	})
 
 	return resultingData
