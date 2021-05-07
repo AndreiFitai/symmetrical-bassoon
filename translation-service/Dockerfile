@@ -1,23 +1,27 @@
 FROM node:14-alpine as base
 
-RUN apk add --no-cache bash
+RUN apk add --update --no-cache bash
 
-RUN mkdir -p /usr/src/app/
+RUN mkdir -p /srv/app
 
-WORKDIR /usr/src/app/
+WORKDIR /srv/app
 
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
-RUN npm i --no-optional
+COPY src /app/src
 
-COPY . .
+RUN npm ci --no-optional
 
-FROM base as production
+FROM base AS build
+
+COPY . /srv/app
 
 COPY wait-for-it.sh wait-for-it.sh 
 
 RUN chmod +x wait-for-it.sh
 
 RUN npm run build
+
+FROM build AS release
 
 EXPOSE 8100

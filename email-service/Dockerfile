@@ -1,18 +1,23 @@
 FROM node:14-alpine as base
 
-RUN mkdir -p /usr/src/app/
+RUN apk add --update --no-cache bash
 
-WORKDIR /usr/src/app/
+RUN mkdir -p /srv/app
 
-COPY package*.json ./
+WORKDIR /srv/app
 
-# --no-optional to skip installing optional depency for rmsq-worker 
-RUN npm i --no-optional
+COPY package.json package-lock.json ./
 
-COPY . .
+COPY src /app/src
 
-FROM base as production
+RUN npm ci --no-optional
+
+FROM base AS build
+
+COPY . /srv/app
 
 RUN npm run build
+
+FROM build AS release
 
 EXPOSE 8090

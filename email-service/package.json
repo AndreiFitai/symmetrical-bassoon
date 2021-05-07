@@ -5,7 +5,7 @@
 	"scripts": {
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
-		"start": "NODE_ENV=prod npm run build && node dist/src/index.js",
+		"start": "NODE_ENV=prod node dist/src/index.js",
 		"dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"pretest": "npm run build",
 		"test": "NODE_ENV=prod mocha --spec dist/test/**/*.spec.js",

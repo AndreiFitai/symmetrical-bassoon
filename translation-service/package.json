@@ -5,7 +5,7 @@
 	"scripts": {
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
-		"start": "NODE_ENV=prod npm run build && typeorm migration:run && node dist/src/index.js",
+		"start": "NODE_ENV=prod typeorm migration:run && node dist/src/index.js",
 		"dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"debug": "ts-node-dev --inspect --respawn --transpile-only ./src/index.ts",
 		"migrate": "npm run build && NODE_ENV=prod typeorm migration:run",
@@ -51,6 +51,7 @@
 		"eslint-plugin-promise": "^4.3.1",
 		"husky": "^6.0.0",
 		"mocha": "^8.3.2",
+		"pino-pretty": "^4.7.1",
 		"prettier": "^2.2.1",
 		"ts-node-dev": "^1.1.6",
 		"typescript": "^4.2.4"
