@@ -22,10 +22,16 @@ describe('Subtitle helper', () => {
 			expect(result[0].text).to.contain('Arwen')
 		})
 
-		it('should throw an error when subtitle format is incorrect', () => {
+		it('should throw an error when subtitle line is missing timeframe', () => {
 			expect(() => splitSubtitleData('hello world!')).to.throw(
-				'invalid subtitle format'
+				'missing line timeframe'
 			)
+		})
+
+		it('should throw an error when subtitle line is missing id', () => {
+			expect(() =>
+				splitSubtitleData('[01:00:00 - 01:00:005] hello world!')
+			).to.throw('missing line id')
 		})
 	})
 
@@ -37,7 +43,7 @@ describe('Subtitle helper', () => {
 			expect(result).to.equal(expectedTranslatedSubs)
 		})
 
-		it('should panic', () => {
+		it('should throw when subtitle format is not correct', () => {
 			expect(() => splitSubtitleData('hello world!')).to.throw(
 				'invalid subtitle format'
 			)

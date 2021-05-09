@@ -10,17 +10,22 @@ export const splitSubtitleData = (stringData: string): SubtitleUnit[] => {
 	const subtitleUnits = stringData.split('\n')
 
 	const processedSubtitles = subtitleUnits.map((subtitleUnit) => {
-		if (subtitleUnit.indexOf('[') === -1 || subtitleUnit.indexOf(']') === -1)
-			throw new Error('invalid subtitle format - cannot process text')
+		const leftBracketIndex = subtitleUnit.indexOf('[')
+		const rightBracketIndex = subtitleUnit.indexOf(']')
 
-		const id = subtitleUnit.slice(0, subtitleUnit.indexOf('[') - 1)
+		if (leftBracketIndex === -1 || rightBracketIndex === -1)
+			throw new Error('invalid subtitle format: missing line timeframe')
+
+		const id = subtitleUnit.slice(0, leftBracketIndex - 1)
+
+		if (!Number(id)) throw new Error('invalid subtitle format: missing line id')
 
 		const timeFrame = subtitleUnit.slice(
-			subtitleUnit.indexOf('['),
-			subtitleUnit.indexOf(']') + 1
+			leftBracketIndex,
+			rightBracketIndex + 1
 		)
 
-		const text = subtitleUnit.slice(subtitleUnit.indexOf(']') + 1).trim()
+		const text = subtitleUnit.slice(rightBracketIndex + 1).trim()
 
 		return { id: Number(id), timeFrame, text }
 	})
