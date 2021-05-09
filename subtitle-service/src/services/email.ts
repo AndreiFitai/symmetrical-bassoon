@@ -1,20 +1,27 @@
 import { rsmq } from '../rsmq'
 import { QUEUE_NAME } from '../constants'
 import { logger } from '../logger'
+
 export interface MailData {
-	email: string
-	messagePayload: string
+	from: string
+	to: string
+	subject: string
+	emailContent: string
 	attachment?: Buffer
 }
 
 export const emailResults = ({
-	email,
-	messagePayload,
+	from,
+	to,
+	subject,
+	emailContent,
 	attachment
 }: MailData) => {
 	const msg: MailData = {
-		email,
-		messagePayload
+		from,
+		to,
+		subject,
+		emailContent
 	}
 
 	if (attachment) msg.attachment = attachment

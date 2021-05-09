@@ -5,7 +5,7 @@ import {
 } from '../helpers/subtitle-helper'
 import axios from 'axios'
 import { API_TRANSLATE } from '../config'
-import { TRANSLATE_ENDPOINT } from '../constants'
+import { TRANSLATE_ENDPOINT, FROM, SUBJECT, EMAILCONTENT } from '../constants'
 import { parseFile } from '../helpers/file-helper'
 import { emailResults } from './email'
 export interface SubsWithTranslation extends SubtitleUnit {
@@ -46,11 +46,18 @@ export const translateAndEmailResult = async (
 		const rebuiltSubtitles = rebuildTranslatedSubtitles(translatedSubtitles)
 
 		emailResults({
-			email,
-			messagePayload: 'success',
+			from: FROM,
+			to: email,
+			subject: SUBJECT.SUCCESS,
+			emailContent: EMAILCONTENT,
 			attachment: Buffer.from(rebuiltSubtitles, 'utf8')
 		})
 	} catch (error) {
-		emailResults({ email, messagePayload: `something went wrong :${error}` })
+		emailResults({
+			from: FROM,
+			to: email,
+			subject: SUBJECT.ERROR,
+			emailContent: `something went wrong :${error}`
+		})
 	}
 }
