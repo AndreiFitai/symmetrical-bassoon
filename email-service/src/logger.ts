@@ -5,7 +5,7 @@ const isDevelopment = NODE_ENV === 'dev'
 const isTest = NODE_ENV !== 'test'
 
 export const logger = Pino({
-	enabled: true,
+	enabled: isTest,
 	prettyPrint: isDevelopment ? { colorize: true } : false,
 	name: 'email-service',
 	level: isDevelopment ? 'debug' : 'warn'

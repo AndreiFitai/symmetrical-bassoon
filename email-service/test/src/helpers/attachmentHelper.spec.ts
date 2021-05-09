@@ -7,6 +7,7 @@ describe('Email service', () => {
 			const result = parseAttachementData(args)
 			expect(result).toEqual('this is a test string')
 		})
+
 		it('should process buffer to string correctly', () => {
 			const args = {
 				type: 'Buffer',
@@ -15,6 +16,7 @@ describe('Email service', () => {
 			const result = parseAttachementData(args)
 			expect(result).toEqual('this is a test string')
 		})
+
 		it('should process unkown data type correctly', () => {
 			const args = {
 				type: '',

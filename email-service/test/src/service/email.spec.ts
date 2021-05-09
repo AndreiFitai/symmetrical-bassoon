@@ -24,9 +24,9 @@ describe('Email service', () => {
 	it('it sends an email without attachment', async () => {
 		const message = JSON.stringify({
 			from: 'Subtitles Translator <subtitles@translator.com>',
-			email: 'test@test.com',
+			to: 'test@test.com',
 			subject: 'Subtitles have been translated !',
-			messagePayload: 'success'
+			emailContent: 'success'
 		})
 
 		const emailer = new Emailer('localhost', 1234)
@@ -39,9 +39,9 @@ describe('Email service', () => {
 	it('it sends an email with attachment', async () => {
 		const message = JSON.stringify({
 			from: 'Subtitles Translator <subtitles@translator.com>',
-			email: 'test@test.com',
+			to: 'test@test.com',
 			subject: 'Subtitles have been translated !',
-			messagePayload: 'success',
+			emailContent: 'success',
 			attachment: { type: 'text/plain', data: 'i love to test' }
 		})
 

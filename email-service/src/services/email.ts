@@ -16,13 +16,13 @@ export default class Emailer {
 	}
 
 	async sendEmail(msg: any) {
-		const { email, messagePayload, attachment } = JSON.parse(msg)
+		const { from, to, subject, emailContent, attachment } = JSON.parse(msg)
 
 		const message = {
-			from: 'Subtitles Translator <subtitles@translator.com>',
-			to: email,
-			subject: 'Subtitles have been translated !',
-			text: messagePayload,
+			from: from,
+			to: to,
+			subject: subject,
+			text: emailContent,
 			attachments: <{ filename: string; content: string }[]>[]
 		}
 
