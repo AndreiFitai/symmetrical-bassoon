@@ -1,9 +1,9 @@
 import { checkForRequestErrors } from '../../../src/helpers/validators'
 import { Request, Response } from 'express'
 
-describe('File Helper', () => {
-	describe('parseFile', () => {
-		it('should read file correctly', () => {
+describe('Validator Helper', () => {
+	describe('checkForRequestErrors', () => {
+		it('should return false if there are no errors', () => {
 			const req = {
 				file: {
 					mimetype: 'text/plain'
@@ -27,7 +27,7 @@ describe('File Helper', () => {
 			expect(result).toBe(false)
 		})
 
-		it('should throw an error when uploaded file is not .txt', () => {
+		it('should return response code 400 uploaded file is not .txt', () => {
 			const req = {
 				file: {
 					mimetype: 'text/csv'
@@ -50,7 +50,7 @@ describe('File Helper', () => {
 			)
 		})
 
-		it('should throw an error when email is not valid', () => {
+		it('should return response code 400 when email is not valid', () => {
 			const req = {
 				file: {
 					mimetype: 'text/plain'
@@ -76,7 +76,7 @@ describe('File Helper', () => {
 			)
 		})
 
-		it('should throw an error when translation language not sent', () => {
+		it('should return response code 400 when translation language not sent', () => {
 			const req = {
 				file: {
 					mimetype: 'text/plain'

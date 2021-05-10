@@ -18,8 +18,8 @@ afterEach(() => {
 	mockEmailResults.mockClear()
 })
 
-describe('Email queue service', () => {
-	it('it sends message to queue without attachment', async () => {
+describe('Translation service', () => {
+	it('sends request to translation service and emails user', async () => {
 		mockedAxios.post.mockImplementationOnce(() =>
 			Promise.resolve({ data: translatedUnits })
 		)
@@ -38,7 +38,7 @@ describe('Email queue service', () => {
 		expect(mockEmailResults.mock.calls[0][0]).toEqual(messageToQueue)
 	})
 
-	it('it sends message to queue without attachment', async () => {
+	it('sends error message in case translation service unreacheable', async () => {
 		mockedAxios.post.mockRejectedValueOnce({
 			response: { data: 'could not get translations' }
 		})
