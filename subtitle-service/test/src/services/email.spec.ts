@@ -8,7 +8,7 @@ afterEach(() => {
 })
 
 describe('Email queue service', () => {
-	it('it sends message to queue without attachment', async () => {
+	it('it sends message to queue without attachment', () => {
 		const message = {
 			from: 'Subtitles Translator <subtitles@translator.com>',
 			to: 'test@test.com',
@@ -23,7 +23,7 @@ describe('Email queue service', () => {
 		expect(mockSendMessage.mock.calls[0][0]).toEqual(result)
 	})
 
-	it('it sends message to queue with attachment', async () => {
+	it('it sends message to queue with attachment', () => {
 		const message = {
 			from: 'Subtitles Translator <subtitles@translator.com>',
 			to: 'test@test.com',
