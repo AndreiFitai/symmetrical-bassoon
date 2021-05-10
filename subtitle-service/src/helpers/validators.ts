@@ -12,7 +12,7 @@ export const checkForRequestErrors = (
 	}
 
 	if (!EmailValidator.validate(req?.body?.email)) {
-		return res.status(400).send('Please provide a valid email address ')
+		return res.status(400).send('Please provide a valid email address')
 	}
 
 	if (!req?.body?.language) {

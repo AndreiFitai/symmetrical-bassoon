@@ -1,8 +1,5 @@
-import * as chai from 'chai'
 import { parseFile } from '../../../src/helpers/file-helper'
 import { createMulterFileArgs } from '../../testHelpers'
-
-const expect = chai.expect
 
 describe('File Helper', () => {
 	describe('parseFile', () => {
@@ -11,8 +8,8 @@ describe('File Helper', () => {
 
 			const result = parseFile(args)
 
-			expect(result).to.be.a('string')
-			expect(result).to.have.string('Arwen')
+			expect(typeof result).toBe('string')
+			expect(result).toContain('Arwen')
 		})
 
 		it('should read empty file  correctly', () => {
@@ -20,15 +17,13 @@ describe('File Helper', () => {
 
 			const result = parseFile(args)
 
-			expect(result).to.be.a('string')
-			// eslint-disable-next-line no-unused-expressions
-			expect(result).to.be.empty
+			expect(result).toEqual('')
 		})
 
 		it('should return an error when there is no file', () => {
 			const args = createMulterFileArgs('doesntexist.txt')
 
-			expect(() => parseFile(args)).to.throw(/parseFile/)
+			expect(() => parseFile(args)).toThrowError(/parseFile/)
 		})
 	})
 })

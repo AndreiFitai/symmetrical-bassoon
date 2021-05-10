@@ -7,14 +7,43 @@
 		"clean": "tsc --build --clean",
 		"start": "NODE_ENV=prod node dist/src/index.js",
 		"dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
-		"pretest": "npm run build",
-		"test": "NODE_ENV=test mocha --spec dist/test/**/*.spec.js",
+		"test": "NODE_ENV=test jest",
+		"coverage": "NODE_ENV=test jest -coverage",
 		"lint": "eslint src/**/*.ts",
 		"lint:fix": "eslint src/**/*.ts --fix"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "npm run lint"
+		}
+	},
+	"jest": {
+		"globals": {
+			"ts-jest": {
+				"ignoreCoverageForDecorators": true,
+				"ignoreCoverageForAllDecorators": true
+			}
+		},
+		"roots": [
+			"<rootDir>/test"
+		],
+		"testMatch": [
+			"<rootDir>/test/**/*.spec.ts"
+		],
+		"transform": {
+			"^.+\\.(ts|tsx)$": "ts-jest"
+		},
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"./src/**/*.ts"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 50,
+				"functions": 40,
+				"lines": 50,
+				"statements": 50
+			}
 		}
 	},
 	"author": "Andrei Fitai",
@@ -30,26 +59,26 @@
 		"rsmq": "^0.12.3"
 	},
 	"devDependencies": {
-		"@types/chai": "^4.2.17",
 		"@types/express": "^4.17.11",
-		"@types/mocha": "^8.2.2",
+		"@types/jest": "^26.0.23",
 		"@types/multer": "^1.4.5",
 		"@types/node": "^15.0.1",
 		"@types/pino": "^6.3.8",
 		"@typescript-eslint/eslint-plugin": "^4.22.0",
 		"@typescript-eslint/parser": "^4.22.0",
-		"chai": "^4.3.4",
 		"eslint": "^7.25.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-config-standard": "^16.0.2",
 		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jest": "^24.3.6",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^3.4.0",
 		"eslint-plugin-promise": "^4.3.1",
 		"husky": "^6.0.0",
-		"mocha": "^8.3.2",
+		"jest": "^26.6.3",
 		"pino-pretty": "^4.7.1",
 		"prettier": "^2.2.1",
+		"ts-jest": "^26.5.6",
 		"ts-node-dev": "^1.1.6",
 		"typescript": "^4.2.4"
 	}

@@ -4,7 +4,8 @@
     "dev-build": "bash scripts/dev-build.sh",
     "prod-build": "bash scripts/prod-build.sh",
     "dev-up": "bash scripts/dev-up.sh",
-    "prod-up": "bash scripts/prod-up.sh"
+    "prod-up": "bash scripts/prod-up.sh",
+    "test-all": "bash scripts/test.sh"
   },
   "dependencies": {}
 }

@@ -127,9 +127,10 @@ I couldn't get the project to work properly on WSL2 so please use MacOS or a Lin
 ### Setup
 
 1. In the main project folder run `npm run setup` to install all required modules for all services and add permissions to the required files
-2. Run `npm run dev-build` to build the containers and start them up - in this mode you can modify services and containers will auto-restart with the new changes
-3. Alternatively run `npm run prod-build` - this would build and run the containers in isolation and would simulate a production enviroment: containers not linked to project folders, no hot reload, different logging level.
-4. After that you can run either `npm run dev-up` or `npm run prod-up` to start up the containers without rebuilding them
+2. Run `npm run test-all` in the main folder to run all existing tests
+3. Run `npm run dev-build` to build the containers and start them up - in this mode you can modify services and containers will auto-restart with the new changes
+4. Alternatively run `npm run prod-build` - this would build and run the containers in isolation and would simulate a production enviroment: containers not linked to project folders, no hot reload, different logging level.
+5. After that you can run either `npm run dev-up` or `npm run prod-up` to start up the containers without rebuilding them
 
 ### Usage
 
@@ -179,7 +180,7 @@ I couldn't get the project to work properly on WSL2 so please use MacOS or a Lin
 - I wanted to use Elasticsearch as it had integrated fuzzy search and wanted to try out a new technology. This became a problem since the learning curve was a bit too high and i couldn't really make it work fast enough. The fuzzy match query also has a strict maximum allowed Levenshtein Edit distance of 2 which would not work considering the requirements of this challange.
   In the end i stuck with MySQL which for a small sample size does the job - it pulls all translations of the specified target language and calculates distances for each text - i would be curious to see how everything with work with a huge sample size.
 
-- Testing - this is a personal challenge for me as i'm struggling with mocking/stubbing in TS. For example i got stuck trying to mock nodemailer and in the end i had to call it quits as i was running out of time. This is definetly an area where i want to focus on in the future.
+- Testing - this is a personal challenge for me as i'm struggling with mocking/stubbing in TS. For example i got stuck trying to mock nodemailer and in the end i had to call it quits as i was running out of time. This is definetly an area where i want to focus on in the future. In the end i switched to Jest from Mocha/Chai as it was easier to work with and mock dependencies.
 
 - Issues between different TypeORM and ts-node-dev - this ate quite a bit of my time as i couldn't figure out what was going on because of my inexperience with how ts-node-dev actually works. Fixed by providing different ormconfig entities locations based on `NODE_ENV` value which is set when running migrations or starting the service.
 
