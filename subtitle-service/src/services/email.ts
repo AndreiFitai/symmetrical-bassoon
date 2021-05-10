@@ -1,5 +1,5 @@
 import { rsmq } from '../rsmq'
-import { QUEUE_NAME, FROM, SUBJECT } from '../constants'
+import { QUEUE_NAME } from '../constants'
 import { logger } from '../logger'
 
 export interface MailData {

@@ -57,7 +57,7 @@ export const translateAndEmailResult = async (
 			from: FROM,
 			to: email,
 			subject: SUBJECT.ERROR,
-			emailContent: `something went wrong :${error}`
+			emailContent: `something went wrong - ${error}`
 		})
 	}
 }

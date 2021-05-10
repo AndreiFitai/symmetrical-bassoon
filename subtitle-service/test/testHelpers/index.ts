@@ -38,3 +38,17 @@ export const translatedUnits = [
 export const expectedTranslatedSubs = `1 [00:00:12.00 - 00:01:20.00] Hallo Welt!
 2 [00:03:55.00 - 00:04:20.00] Wie gehts ?
 `
+export const messageToQueue = {
+	from: 'Subtitles Translator <subtitles@translator.com>',
+	to: 'test@test.com',
+	subject: 'Subtitles have been translated !',
+	emailContent: 'Enjoy your translated subtitles !',
+	attachment: Buffer.from(expectedTranslatedSubs)
+}
+
+export const errrorMessageToQueue = {
+	from: 'Subtitles Translator <subtitles@translator.com>',
+	to: 'test@test.com',
+	subject: "Subtitles couldn't be translated",
+	emailContent: 'something went wrong - Error: could not get translations'
+}
