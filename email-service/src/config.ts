@@ -3,6 +3,8 @@ import { config } from 'dotenv'
 config()
 
 function env(name: string): string {
+	if (name !== 'NODE_ENV' && process.env.NODE_ENV === 'test') return name
+
 	const value = process.env[name]
 
 	if (!value) {
