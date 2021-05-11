@@ -8,5 +8,5 @@ export const logger = Pino({
 	enabled: isTest,
 	prettyPrint: isDevelopment ? { colorize: true } : false,
 	name: 'subtitle-service',
-	level: isDevelopment ? 'debug' : 'warn'
+	level: isDevelopment ? 'debug' : 'info'
 })

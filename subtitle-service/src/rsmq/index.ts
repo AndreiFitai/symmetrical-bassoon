@@ -10,11 +10,11 @@ rsmq.createQueue({ qname: QUEUE_NAME }, (err, resp) => {
 		if (err.name !== 'queueExists') {
 			logger.error(err)
 		} else {
-			logger.info(`The ${QUEUE_NAME} queue exists and that's ok :)`)
+			logger.debug(`The ${QUEUE_NAME} queue exists and that's ok :)`)
 		}
 	}
 
 	if (resp === 1) {
-		logger.info('Queue created')
+		logger.debug('Queue created')
 	}
 })

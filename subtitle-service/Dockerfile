@@ -1,23 +1,26 @@
-FROM node:14-alpine as base
+FROM node:14-alpine AS build
 
-RUN apk add --update --no-cache bash tree
+WORKDIR /srv
 
-RUN mkdir -p /srv/app
+COPY package*.json /srv/
 
-WORKDIR /srv/app
+RUN npm ci
 
-COPY package.json package-lock.json ./
+COPY tsconfig.json /srv/
 
-COPY src /app/src
-
-RUN npm ci --no-optional
-
-FROM base AS build
-
-COPY . /srv/app
+COPY src /srv/src/
 
 RUN npm run build
 
-FROM build AS release
+RUN npm ci --production
 
-EXPOSE 8080
+FROM node:14-alpine
+
+WORKDIR /srv
+
+COPY --from=build /srv/node_modules /srv/node_modules
+
+COPY --from=build /srv/dist /srv/dist
+
+COPY --from=build /srv/package*.json /srv/
+

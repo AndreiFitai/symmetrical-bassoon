@@ -69,6 +69,5 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts",
-    "migrations/**/*.ts"
   ]
 }

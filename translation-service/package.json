@@ -5,10 +5,10 @@
 	"scripts": {
 		"build": "tsc --build",
 		"clean": "tsc --build --clean",
-		"start": "NODE_ENV=prod typeorm migration:run && node dist/src/index.js",
+		"start": "npm run migrate && NODE_ENV=prod node dist/src/index.js",
 		"dev": "NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
 		"debug": "ts-node-dev --inspect --respawn --transpile-only ./src/index.ts",
-		"migrate": "npm run build && NODE_ENV=prod typeorm migration:run",
+		"migrate": "typeorm migration:run",
 		"migrate:undo": "typeorm migration:revert",
 		"test": "NODE_ENV=test jest",
 		"coverage": "NODE_ENV=test jest -coverage",
