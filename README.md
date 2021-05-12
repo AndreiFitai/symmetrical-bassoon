@@ -116,7 +116,7 @@ We wish you the best of lucks 🙏!
 This was one of the most fun challenges I had to work with purely due to the fact that the requirements allow for either a simple solution or a more complex one with different approaches to consider.
 Due to that i was really excited to implement something a bit more complex ( maybe overkill ) for this solution:
 
-![Project diagram](project-diagram.png)
+![Project overview](project-overview.png)
 
 ## How to use
 
