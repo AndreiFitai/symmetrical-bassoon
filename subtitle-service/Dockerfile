@@ -1,4 +1,4 @@
-FROM node:14-alpine AS build
+FROM node:14-alpine AS base
 
 WORKDIR /srv
 
@@ -9,6 +9,8 @@ RUN npm ci
 COPY tsconfig.json /srv/
 
 COPY src /srv/src/
+
+FROM base as build
 
 RUN npm run build
 

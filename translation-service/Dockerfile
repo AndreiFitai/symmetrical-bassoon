@@ -1,4 +1,6 @@
-FROM node:14-alpine AS build
+FROM node:14-alpine AS base
+
+RUN apk add --update --no-cache bash
 
 WORKDIR /srv
 
@@ -11,6 +13,8 @@ COPY tsconfig.json /srv/
 COPY ormconfig.js /srv/
 
 COPY src /srv/src/
+
+FROM base as build
 
 RUN npm run build
 

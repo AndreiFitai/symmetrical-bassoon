@@ -4,6 +4,7 @@ services:
     build:
       context: ./subtitle-service
       dockerfile: Dockerfile
+      target: base
     environment:
       PORT: 8070
       API_TRANSLATE: "http://translation-service:8100"
@@ -11,12 +12,13 @@ services:
     ports:
       - 8070:8070
     volumes:
-      - ./subtitle-service:/srv/app
+      - ./subtitle-service:/srv/
     command: npm run dev
   translation-service:
     build:
       context: ./translation-service
       dockerfile: Dockerfile
+      target: base
     depends_on:
       - mysql-db
     restart: always
@@ -31,14 +33,13 @@ services:
     ports:
       - 8100:8100
     volumes:
-      - ./translation-service:/srv/app
-    command: >
-      bash -c "./wait-for-it.sh mysql-db:3306 --
-      npm run migrate && npm run dev"
+      - ./translation-service:/srv/
+    command: bash -c "./wait-for-it.sh mysql-db:3306 -- npm run migrate && npm run dev"
   email-service:
     build:
       context: ./email-service
       dockerfile: Dockerfile
+      target: base
     depends_on:
       - mailserver
     environment:
@@ -48,7 +49,7 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - ./email-service:/srv/app
+      - ./email-service:/srv/
     command: npm run dev
   redis:
     image: redis:alpine
